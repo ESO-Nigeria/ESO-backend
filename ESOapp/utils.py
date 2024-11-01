@@ -28,7 +28,7 @@ def notify_admins(action, item, item_type):
             fail_silently=True,
         )
     
-    # Create dashboard notification
+
     AdminNotification.objects.create(
         title=subject,
         message=message

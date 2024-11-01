@@ -1,11 +1,128 @@
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap');
+
+
 .nav-link.active {
     background-color: #D8F6E5 !important;
+    color:#1B4137 !important;
+    box-shadow: none !important;
+}
+body {
+    background-color: #F9FAFB !important;
+    font-family: 'DM Sans', sans-serif !important;
 }
 
 .nav-link:hover {
-    background-color: #c5e9d7 !important; 
+    background-color: #F9FAFB !important; 
+    /* color:#D8F6E5 !important; */
+}
+.nav-item>a{
+    color:#1B4137 !important;
+}
+.nav-item {
+    color:#1B4137 !important;
+    padding:0px 10px 0px 10px !important;
+    margin-top: 10px !important;
+}
+.shadow-0{
+    box-shadow: none !important;
+}
+input[type="text"], input[type="password"], input[type="email"], input[type="number"], input[type="tel"], input[type="url"], input[type="search"],select.form-control {
+    border-radius: 8px !important;
+    -webkit-border-radius: 8px !important;
+    -moz-border-radius: 8px !important;
+    -ms-border-radius: 8px !important;
+    -o-border-radius: 8px !important;
+    -o-border-radius: 8px !important;
+    height: 44px !important;
+}
+textarea {
+    border-radius: 8px !important;
+    -webkit-border-radius: 8px !important;
+    -moz-border-radius: 8px !important;
+    -ms-border-radius: 8px !important;
+    -o-border-radius: 8px !important;
+}
+/* General button styling */
+.btn-subtle {
+    padding: 8px 16px;
+    border: 1px solid;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-body {
-    background-color: #f8fafc !important;
+/* Subtle Info Button */
+.btn-subtle-info {
+    background-color: #D1ECF1; /* Light blue */
+    color: #0C5460;           /* Darker blue for text */
+    border-color: #BEE5EB;
+    
+}
+.btn-subtle-info:hover {
+    background-color: #C0E3EB;
+}
+
+/* Subtle Success Button */
+.btn-subtle-success {
+    background-color: #D4EDDA; /* Light green */
+    color: #155724;            /* Dark green for text */
+    border-color: #C3E6CB;
+}
+.btn-subtle-success:hover {
+    background-color: #C3E6CB;
+}
+
+/* Subtle Warning Button */
+.btn-subtle-warning {
+    background-color: #FFF3CD; /* Light yellow */
+    color: #856404;            /* Darker yellow/brown for text */
+    border-color: #FFEEBA;
+}
+.btn-subtle-warning:hover {
+    background-color: #FFE8A1;
+}
+
+/* Subtle Danger Button */
+.btn-subtle-danger {
+    background-color: #F8D7DA; /* Light red/pink */
+    color: #721C24;            /* Darker red for text */
+    border-color: #F5C6CB;
+}
+.btn-subtle-danger:hover {
+    background-color: #F1B0B7;
+}
+
+aside.main-sidebar {
+    box-shadow: none !important;
+    background-color: #ffffff !important;
+}
+nav.main-header{
+    background-color: #ffffff !important;
+}
+.col-12  div.card{
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 8px !important;
+    -webkit-border-radius: 8px !important;
+    -moz-border-radius: 8px !important;
+    -ms-border-radius: 8px !important;
+    -o-border-radius: 8px !important;
+    -o-border-radius: 8px !important;
+}
+button.btn-outline-primary{
+    background-color: #31A962 !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 8px !important;
+    height: 44px !important;
+    -webkit-border-radius: 8px !important;
+    -moz-border-radius: 8px !important;
+    -ms-border-radius: 8px !important;
+    -o-border-radius: 8px !important;
+    -o-border-radius: 8px !important;
+}
+a{
+    color:#31A962 !important;
 }

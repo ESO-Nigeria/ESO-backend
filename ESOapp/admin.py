@@ -4,8 +4,9 @@ from django.contrib import admin
 from .models import Profile, Program, SocialLink, Rating, CustomUser, AdminNotification
 from django.contrib import messages
 from .utils import send_approval_email, send_rejection_email
+from django.contrib.auth.models import Group
 
-
+admin.site.unregister(Group)
 
 class SocialLinkInline(admin.TabularInline):
     model = SocialLink
@@ -43,6 +44,7 @@ class ProfileAdmin(admin.ModelAdmin):
         self.message_user(request, f"{count} profiles were rejected and users were notified.")
 
     list_display = ('user', 'is_approved', 'needs_review')
+    list_filter = ('is_approved',)
     actions = [approve_profiles, reject_profiles]
     inlines = [SocialLinkInline, RatingInline, ProgramInline]
 
@@ -85,6 +87,7 @@ class ProgramAdmin(admin.ModelAdmin):
             count += 1
         self.message_user(request, f"{count} programs were rejected and owners were notified.")
     list_display = ('title', 'is_approved', 'needs_review')
+    list_filter = ('is_approved',)
     actions = [approve_programs, reject_programs]
 
     def needs_review(self, obj):

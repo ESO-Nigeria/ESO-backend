@@ -95,21 +95,44 @@ WSGI_APPLICATION = 'ESO.wsgi.application'
 JAZZMIN_SETTINGS = {
     "site_title": "ESO Nigeria Admin",
     "site_header": "ESO Nigeria Administration",
-    "site_brand": "ESO Nigeria",
+    "site_brand": ".",
     "welcome_sign": "Welcome to ESO Nigeria Admin",
     "copyright": "ESO Nigeria 2024",
+    "site_logo":"/Images/Brand Logo.png",
+    "site_icon":"/Images/Brand Logo.png",
+    'login_logo': '/Images/Brand Logo.png',
+    'login_logo_dark': '/Images/Brand Logo.png',
+    "site_logo_classes": "rounded-2 shadow-0",
     "search_model": "auth.User",
     "show_ui_builder": True,
     "show_settings": True,
+    "copyright": "ESO Nigeria 2024",
+    "custom_css": '/css/custom.css',
+    "custom_js": None,
     "topmenu_links": [
         {"name": "Dashboard", "url": "admin:index", "permissions": ["auth.view_user"]},
         {"name": "ESO Nigeria", "url": "https://esonigeria.com", "new_window": True},
     ],
+    
+    "dashboard_widgets": [
+        "recent_notifications",
+        "pending_approvals",
+    ],
+    "related_modal_active": True,
+    "order_with_respect_to": [
+        "ESOapp",
+        "ESOapp.CustomUser",
+        "ESOapp.Profile",
+        "ESOapp.Program",
+        "ESOapp.AdminNotification",
+        "authtoken",  # Auth token after your app
+        "authtoken.TokenProxy",
+    ],
      "icons": {
         "auth.user": "far fa-user",
-        "auth.Group": "far fa-users",
+        "auth.Group": "far fa-user-group",
         "ESOapp.CustomUser": "far fa-user",
-        
+        "admin:index": "fas fa-gauge",
         # Communication
         "ESOapp.AdminNotification": "far fa-envelope",
         "ESOapp.Notification": "far fa-bell",
@@ -120,7 +143,7 @@ JAZZMIN_SETTINGS = {
         "ESOapp.Program": "far fa-calendar",
         
         "ESOapp.Profile": "far fa-building",
-        "AuthToken.Token": "far fa-key",
+        "authtoken": "far fa-key",
     }
 }
 
@@ -150,13 +173,12 @@ JAZZMIN_UI_TWEAKS = {
     "button_classes": {
         "primary": "btn-outline-primary",
         "secondary": "btn-outline-secondary",
-        "info": "btn-info",
-        "warning": "btn-warning",
-        "danger": "btn-danger",
-        "success": "btn-success"
+        "info": "btn-subtle-info",
+        "warning": "btn-subtle-warning",
+        "danger": "btn-subtle-danger",
+        "success": "btn-subtle-success"
     },
-    "custom_css": '/static/css/custom.css',
-    "custom_js": None
+    
 }
 
 DJOSER = {
