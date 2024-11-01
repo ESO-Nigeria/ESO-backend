@@ -52,6 +52,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
+    class Meta:
+        verbose_name = "ESO's"  
+        verbose_name_plural = "ESO's"  
 
     def __str__(self):
         return self.email
@@ -60,7 +63,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='profile')
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='profile')
     country = models.CharField(max_length=100, blank=True, null=True)
     state = models.CharField(max_length=100, blank=True, null=True)
     city = models.CharField(max_length=100, blank=True, null=True)

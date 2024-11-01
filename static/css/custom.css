@@ -126,3 +126,6 @@ button.btn-outline-primary{
 a{
     color:#31A962 !important;
 }
+i.icon > a{
+    color: #856404 !important;
+}

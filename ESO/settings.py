@@ -117,6 +117,7 @@ JAZZMIN_SETTINGS = {
     "dashboard_widgets": [
         "recent_notifications",
         "pending_approvals",
+        {"model": "ESOapp.AdminNotification"},
     ],
     "related_modal_active": True,
     "order_with_respect_to": [
@@ -233,6 +234,12 @@ DATABASES = {
         conn_max_age=600
     )
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 REST_FRAMEWORK = {

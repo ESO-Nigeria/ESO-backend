@@ -5,6 +5,8 @@ from .models import Profile, Program, SocialLink, Rating, CustomUser, AdminNotif
 from django.contrib import messages
 from .utils import send_approval_email, send_rejection_email
 from django.contrib.auth.models import Group
+from django.urls import reverse
+from django.utils.safestring import mark_safe
 
 admin.site.unregister(Group)
 
@@ -122,3 +124,27 @@ class AdminNotificationAdmin(admin.ModelAdmin):
     list_display = ('title', 'created_at', 'is_read')
     list_filter = ('is_read', 'created_at')
     search_fields = ('title', 'message')
+    ordering = ('-created_at',)
+    list_per_page = 10
+    
+class CustomAdminSite(admin.AdminSite):
+    def index(self, request, extra_context=None):
+        # Get pending counts
+        pending_profiles = Profile.objects.filter(is_approved=False).count()
+        pending_programs = Program.objects.filter(is_approved=False).count()
+        
+        if pending_profiles > 0:
+            profile_link = f'<a href="{reverse("admin:ESOapp_profile_changelist")}?is_approved__exact=0">Click here to view</a>'
+            messages.warning(request, mark_safe(f'{pending_profiles} profile(s) waiting for approval. {profile_link}'))
+        
+        if pending_programs > 0:
+            program_link = f'<a href="{reverse("admin:ESOapp_program_changelist")}?is_approved__exact=0">Click here to view</a>'
+            messages.warning(request, mark_safe(f'{pending_programs} program(s) waiting for approval. {program_link}'))
+            
+        return super().index(request, extra_context)
+    
+admin.site = CustomAdminSite()
+admin.site.register(Profile, ProfileAdmin)
+admin.site.register(Program, ProgramAdmin)
+admin.site.register(CustomUser, CustomUserAdmin)
+admin.site.register(AdminNotification, AdminNotificationAdmin)

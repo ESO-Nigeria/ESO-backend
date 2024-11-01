@@ -12,12 +12,26 @@ def notify_admins(action, item, item_type):
     admin_users = get_user_model().objects.filter(is_staff=True)
     
     if item_type == "profile":
-        subject = f'Profile {action}: {item.user.organization_name}'
-        message = f'A profile has been {action}:\nOrganization: {item.user.organization_name}'
+        subject = f'New Organization Profile Requires Review: {item.user.organization_name}'
+        message = (
+            f'A new organization profile has been submitted and requires review:\n'
+            f'Organization: {item.user.organization_name}\n'
+            f'Action needed: Please review and approve/reject this profile.'
+        )
     else:  # program
-        subject = f'Program {action}: {item.title}'
-        message = f'A program has been {action}:\nTitle: {item.title}'
+        subject = f'New Program Requires Review: {item.title}'
+        message = (
+            f'A new program has been submitted and requires review:\n'
+            f'Title: {item.title}\n'
+            f'Organization: {item.user.organization_name}\n'
+            f'Action needed: Please review and approve/reject this program.'
+        )
     
+    
+    AdminNotification.objects.create(
+        title=subject,
+        message=message
+    )
     # Send email to all admins
     for admin in admin_users:
         send_mail(
@@ -29,10 +43,7 @@ def notify_admins(action, item, item_type):
         )
     
 
-    AdminNotification.objects.create(
-        title=subject,
-        message=message
-    )
+    
 
 def perform_create_with_notification(serializer, item_type, user=None):
     if user:
