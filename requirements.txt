@@ -2,6 +2,8 @@ asgiref==3.8.1
 certifi==2024.8.30
 cffi==1.17.1
 charset-normalizer==3.4.0
+click==8.1.7
+colorama==0.4.6
 cryptography==43.0.3
 defusedxml==0.8.0rc2
 dj-database-url==2.3.0
@@ -13,8 +15,11 @@ django-templated-mail==1.1.1
 djangorestframework==3.15.2
 djangorestframework-simplejwt==5.3.1
 djoser==2.2.3
+gunicorn==23.0.0
+h11==0.14.0
 idna==3.10
 oauthlib==3.2.2
+packaging==24.1
 psycopg2-binary==2.9.10
 pycparser==2.22
 PyJWT==2.9.0
@@ -27,4 +32,5 @@ sqlparse==0.5.1
 typing_extensions==4.12.2
 tzdata==2024.2
 urllib3==2.2.3
+uvicorn==0.32.0
 whitenoise==6.8.2
