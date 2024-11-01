@@ -1,0 +1,237 @@
+openapi: 3.0.0
+info:
+  title: ESO Authentication API
+  description: API for user authentication and account management
+  version: 1.0.0
+
+servers:
+  - url: https://postman-rest-api-learner.glitch.me
+    description: API server
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+    TokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Format - "Token {token}"
+
+paths:
+  /auth/users/:
+    post:
+      summary: Create Account
+      description: Register a new user account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                username:
+                  type: string
+                password:
+                  type: string
+                  format: password
+                re_password:
+                  type: string
+                  format: password
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                organization_name:
+                  type: string
+                organization_type:
+                  type: string
+                whatsapp_number:
+                  type: string
+              required:
+                - email
+                - username
+                - password
+                - re_password
+      responses:
+        '201':
+          description: Account created successfully
+        '400':
+          description: Invalid input
+
+  /auth/users/activation/:
+    post:
+      summary: Activate Account
+      description: Activate a newly created user account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                uid:
+                  type: string
+                token:
+                  type: string
+              required:
+                - uid
+                - token
+      responses:
+        '200':
+          description: Account activated successfully
+        '400':
+          description: Invalid activation credentials
+
+  /auth/token/login:
+    post:
+      summary: Login Account
+      description: Authenticate user and get access token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: password
+              required:
+                - email
+                - password
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+
+  /auth/token/logout/:
+    post:
+      summary: Logout Account
+      security:
+        - TokenAuth: []
+      description: Logout user and invalidate token
+      responses:
+        '200':
+          description: Logout successful
+
+  /auth/users/me/:
+    get:
+      summary: Get Current User
+      security:
+        - TokenAuth: []
+      description: Get details of currently authenticated user
+      responses:
+        '200':
+          description: User details retrieved successfully
+
+  /auth/users/reset_password/:
+    post:
+      summary: Reset Password
+      description: Request password reset email
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+              required:
+                - email
+      responses:
+        '200':
+          description: Password reset email sent
+
+  /auth/users/reset_password_confirm/:
+    post:
+      summary: Reset Password Confirm
+      description: Confirm password reset with token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                uid:
+                  type: string
+                token:
+                  type: string
+                new_password:
+                  type: string
+                  format: password
+              required:
+                - uid
+                - token
+                - new_password
+      responses:
+        '200':
+          description: Password reset successful
+
+  /info:
+    get:
+      summary: Get All Users
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: string
+          description: User ID
+      responses:
+        '200':
+          description: Users retrieved successfully
+
+    put:
+      summary: Update Account
+      security:
+        - TokenAuth: []
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: string
+          required: true
+          description: User ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+      responses:
+        '200':
+          description: Account updated successfully
+
+    delete:
+      summary: Delete Account
+      security:
+        - TokenAuth: []
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: string
+          required: true
+          description: User ID
+      responses:
+        '204':
+          description: Account deleted successfully
