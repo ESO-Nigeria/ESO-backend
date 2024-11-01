@@ -2,3 +2,9 @@
 /env
 venv
 .env
+*.pyc
+__pycache__
+db.sqlite3
+.env
+staticfiles
+.DS_Store
